@@ -11,7 +11,7 @@ sudo dnf install rsync
 # Para asegurarnos de una conexión sin interrupciones, creamos llaves ssh para que el servidor principal pueda conectarse al clon sin credenciales:
 
 ssh-keygen
-ssh-copy-id nmontero@192.168.1.100
+ssh-copy-id nmontero@192.168.0.17
 
 
 # Luego de ello, en el servidor principal, crearemos la carpeta con los archivos sincronizar:
@@ -30,7 +30,7 @@ mkdir ~/copia2
 
 # Volvemos al servidor principal e iniciamos la sincronización utilizando el usuario e IP address del segundo servidor, parecido a la sincronización ssh:
 
-rsync -avz ~/archivo/ nmontero@192.168.1.100:~/sync/
+rsync -avz ~/archivo/ nmontero@192.168.0.17:~/sync/
 
 # Tendremos que colocar la contraseña del usuario perteneciente al servidor secundario una vez sea requerida. Luego, desde dicho servidor secundario, comprobamos que los archivos hayan sido transmitidos:
 
@@ -45,7 +45,7 @@ nano script.sh
 # Luego, crearemos un script para la sincronización de los documentos:
 
 #!/bin/bash
-rsync -avz ~/copia nmontero@192.168.1.100:~/copia2
+rsync -avz ~/copia nmontero@192.168.0.17:~/copia2
 
 # Al concluir, guardamos el archivo y agregamos permisos de ejecución:
 
@@ -66,5 +66,6 @@ ls
 
 cd ~/copia2
 ls
+
 
 # Si los archivos creados previamente (monterito) aparecen en la capeta, significa que el script ha funcionado correctamente.
