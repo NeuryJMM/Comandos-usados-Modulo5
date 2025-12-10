@@ -18,8 +18,9 @@ sudo systemctl enable httpd && sudo systemctl start httpd
 sudo systemctl enable keepalived && sudo systemctl start keepalived
 
 # Creamos una página index.html en cada servidor:
+sudo nano /var/www/html/index.html
 
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -30,7 +31,7 @@ sudo systemctl enable keepalived && sudo systemctl start keepalived
 </body>
 </html>
 
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -55,7 +56,7 @@ Listen *:80
 
 sudo nano /etc/keepalived/keepalived.conf
 
-lobal_defs {
+global_defs {
 	router_id SERVER1
 }
 vrrp_script check_service {
@@ -85,7 +86,7 @@ vrrp_instance VI_1 {
     }
 }
 
-lobal_defs {
+global_defs {
 	router_id SERVER2
 }
 vrrp_script check_service {
@@ -124,3 +125,4 @@ sudo systemctl restart keepalived.service
 
 
 # Finalmente, desde nuestro host, abrimos la IP flotante desde un navegador y verificamos el servidor activo. Luego, para comprobar la alta disponibilidad, iniciamos un ping permanente y reiniciamos el servidor master o apagamos la interfaz; si el ping continúa a pesar del reinicio, y el navegador cargar la información del backup, la configuración ha sido realizada exitosamente.
+
