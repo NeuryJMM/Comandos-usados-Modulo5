@@ -43,7 +43,7 @@ sudo systemctl enable keepalived && sudo systemctl start keepalived
 
 # Habilitamos el puerto 80/TCP, protocolo VRRP y zona pública en los firewalls de ambos servidores de RHEL:
 
-firewall-cmd --permanent --add-port=80/tcp --zone=public && firewall-cmd --permanent --add-protocol=vrrp --zone=public
+sudo firewall-cmd --permanent --add-port=80/tcp --zone=public && sudo firewall-cmd --permanent --add-protocol=vrrp --zone=public
 sudo firewall-cmd --reload
 
 # Luego, configuramos la escucha del puerto 80 en el archivo de configuración de Apache en ambos servidores:
@@ -120,6 +120,7 @@ vrrp_instance VI_1 {
 
 sudo systemctl restart httpd
 sudo systemctl restart keepalived.service
+
 
 
 # Finalmente, desde nuestro host, abrimos la IP flotante desde un navegador y verificamos el servidor activo. Luego, para comprobar la alta disponibilidad, iniciamos un ping permanente y reiniciamos el servidor master o apagamos la interfaz; si el ping continúa a pesar del reinicio, y el navegador cargar la información del backup, la configuración ha sido realizada exitosamente.
