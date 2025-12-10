@@ -53,6 +53,7 @@ sudo pcs resource create IP_Flotante ocf:heartbeat:IPaddr2 ip=192.168.0.10 cidr_
 
 # Luego de ello, desde nuestra máquina host probamos la disponibilidad de los nodos: hacemos un ping permanente a la IP address virtual:
 
-ping 192.168.0.10
+ping -t 192.168.0.10
 
 # Mientras hacemos ping, reiniciamos los servidores de forma intercalada para comprobar que Pacemaker transfiere la IP flotante al nodo restante. Si el ping no se pierde, la configuración ha sido exitosa.
+
